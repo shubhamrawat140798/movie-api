@@ -1,0 +1,110 @@
+openapi: 3.0.1
+info:
+  title: Movie API
+  description: Movie microservice
+  version: 1.0.0
+servers:
+- url: http://localhost:9004
+  description: Generated server url
+paths:
+  /v1.0/movie/edit:
+    put:
+      tags:
+      - movie-controller
+      operationId: editMovie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1.0/movie/add:
+    post:
+      tags:
+      - movie-controller
+      operationId: addMovie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1.0/movie/all:
+    get:
+      tags:
+      - movie-controller
+      operationId: findAll
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Movie'
+  /v1.0/movie/delete:
+    delete:
+      tags:
+      - movie-controller
+      operationId: deleteMovie
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Movie'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    Movie:
+      required:
+      - actor
+      - description
+      - director
+      - genre
+      - releaseDate
+      - title
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        title:
+          type: string
+        director:
+          type: array
+          items:
+            type: string
+        genre:
+          type: array
+          items:
+            type: string
+        actor:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        releaseDate:
+          type: string
